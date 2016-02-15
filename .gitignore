@@ -1,0 +1,9 @@
+client_part
+server_part
+/x64
+/Release
+/Debug
+/.vs
+*.VC.db
+*.vcxproj.user
+*.o

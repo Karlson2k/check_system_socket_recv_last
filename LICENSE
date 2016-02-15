@@ -1,0 +1,8 @@
+Test programs for checking ability to retrieve from system last received
+data from remote host after TCP connection was closed by remote host.
+Copyright (C) 2016 Karlson2k (Evgeny Grin)
+
+You can run, copy, modify, publish and do whatever you want with this
+programs as long as this message and copyright string above are preserved.
+You are also explicitly allowed to reuse this programs under any LGPL or
+GPL license or under any BSD-style license.

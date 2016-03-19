@@ -384,6 +384,7 @@ int do_communicate (const struct sockaddr_in *sock_addr_p, socklen_t addrlen, en
 int do_client (in_addr_t srv_ip_addr)
 {
   int result = 0;
+  int total_res = 0;
   struct sockaddr_in sock_addr;
   const socklen_t addrlen = sizeof(sock_addr);
   memset (&sock_addr, 0, sizeof (sock_addr));
@@ -392,26 +393,34 @@ int do_client (in_addr_t srv_ip_addr)
   sock_addr.sin_port = htons (USE_PORT);
   sock_addr.sin_addr.s_addr = srv_ip_addr;
   result = do_communicate (&sock_addr, addrlen, COMM_SIMPLE);
+  total_res += result;
   if (result <= 1)
   {
     result = do_communicate (&sock_addr, addrlen, COMM_DELAY);
+    total_res += result;
     if (result <= 1)
     {
       result = do_communicate (&sock_addr, addrlen, COMM_ADD_DATA);
+      total_res += result;
       if (result <= 1)
       {
         result = do_communicate (&sock_addr, addrlen, COMM_ADD_DATA_TCPNDL);
+        total_res += result;
         if (result <= 1)
         {
           result = do_communicate (&sock_addr, addrlen, COMM_DELAY_ADD_DATA);
+          total_res += result;
           if (result <= 1)
+          {
             result = do_communicate (&sock_addr, addrlen, COMM_ADD_DATA_DELAY);
+            total_res += result;
+          }
         }
       }
     }
   }
 
-  return result;
+  return total_res;
 }
 
 void print_usage (const char *prog_name)
